@@ -9,3 +9,5 @@ Description: Create a National Student Clearinghouse request file in the require
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/hcc-donder/nscrequest
+BugReports: https://github.com/hcc-donder/nscrequest/issues
