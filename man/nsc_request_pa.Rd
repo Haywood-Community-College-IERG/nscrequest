@@ -28,6 +28,12 @@ nsc_request_pa(
 }
 \description{
 Create a National Student Clearinghouse Prior Attendance (PA) request file
-in the required format. This requires a config file which contains required
-elements. DOB must be either a date or a character string with format "%Y%m%d".
+in the required format.
+This requires a configuration object which contains required elements.
+nsc_conf <- nsc_config(
+schoolCode="YOURFICECODE",
+branchCode="YOURBRANCHCODE",
+schoolName="YOURSCHOOLNAME"
+)
+DOB must be either a date or a character string with format "\%Y\%m\%d".
 }

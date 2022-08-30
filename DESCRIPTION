@@ -2,12 +2,25 @@ Package: nscrequest
 Type: Package
 Title: Create and process a National Student Clearinghouse request/return file
 Version: 0.0.2022-08-30.1
-Author: David Onder
-Maintainer: David Onder <donder@haywood.edu>
+Authors@R: person("David", "Onder", 
+                  email = "donder@haywood.edu", 
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0001-5027-2264"))
 Description: Create a National Student Clearinghouse request file in the required format.
     Also, process a return file into a data frame with one record per student per college.
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
 URL: https://github.com/hcc-donder/nscrequest
 BugReports: https://github.com/hcc-donder/nscrequest/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Depends:
+    R (>= 3.3.1)
+Imports:
+    dplyr (>= 1.0.7),
+    magrittr (>= 2.0.1),
+    readr (>= 2.1.1),
+    stringr (>= 1.4.0),
+    tibble (>= 3.1.6),
+    tidyr (>= 1.1.4),
+    rlang (>= 1.0.2)

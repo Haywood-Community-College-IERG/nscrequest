@@ -8,8 +8,6 @@ nsc_return_se_convert(fn)
 }
 \arguments{
 \item{fn}{Full path to the details file provided by NSC}
-
-\item{type}{The type of merge. Possible options are csv, fixed, other}
 }
 \description{
 Convert the National Student Clearinghouse return file to a database format

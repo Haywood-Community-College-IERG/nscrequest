@@ -17,14 +17,15 @@
 #' @param search If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)
 #' @param enrolledStudents Are these students currently enrolled? Set to FALSE for PA query to allow SSN.
 #' @export
-#' @importFrom magrittr %<>%
+#' @importFrom magrittr `%<>%` `%>%`
 #' @importFrom dplyr coalesce
 #' @importFrom readr write_tsv
+#' @importFrom stringr str_replace
 #'
 nsc_request <- function(df,
                         config,
                         inquiryType="SE",
-                        path=getwd(),
+                        path=NA_character_,
                         fn=paste0(deparse(substitute(df)),"_SE.tsv"),
                         search=format(Sys.Date(),"%Y%m%d"),
                         enrolledStudents=ifelse(inquiryType=="SE",FALSE,TRUE)
@@ -60,7 +61,7 @@ nsc_request <- function(df,
         warning(paste0("SSN provided but ignored - inquiry(",inquiryType,"), enrolled(",enrolledStudents,")"))
     }
 
-    if (missing(path)) {
+    if (missing(path) || is.na(path)) {
         path <- getwd()
         warning(paste("Path set to",path))
     }
@@ -199,7 +200,7 @@ nsc_config <- function( schoolCode, branchCode, schoolName ) {
 #' Create a National Student Clearinghouse Prior Attendance (PA) request file
 #'
 #' Create a National Student Clearinghouse Prior Attendance (PA) request file
-#' in the required format. 
+#' in the required format.
 #' This requires a configuration object which contains required elements.
 #' nsc_conf <- nsc_config(
 #'                 schoolCode="YOURFICECODE",
@@ -230,7 +231,7 @@ nsc_request_pa <- function(df,
 #' Create a National Student Clearinghouse Subsequent Enrollment (SE) request file
 #'
 #' Create a National Student Clearinghouse Subsequent Enrollment (SE) request file
-#' in the required format. 
+#' in the required format.
 #' This requires a configuration object which contains required elements.
 #' nsc_conf <- nsc_config(
 #'                 schoolCode="YOURFICECODE",

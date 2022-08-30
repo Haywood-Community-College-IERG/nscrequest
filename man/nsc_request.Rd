@@ -8,7 +8,7 @@ nsc_request(
   df,
   config,
   inquiryType = "SE",
-  path = getwd(),
+  path = NA_character_,
   fn = paste0(deparse(substitute(df)), "_SE.tsv"),
   search = format(Sys.Date(), "\%Y\%m\%d"),
   enrolledStudents = ifelse(inquiryType == "SE", FALSE, TRUE)
@@ -17,7 +17,7 @@ nsc_request(
 \arguments{
 \item{df}{Dataframe to convert into format for submission to NSC}
 
-\item{config}{A configuration dataframe for NSC files}
+\item{config}{A configuration object for NSC files}
 
 \item{inquiryType}{One of CO (Longitudinal Cohort), DA (Declined Admission), PA (Prior Attendance), or SE (Subsequent Enrollment)}
 
@@ -31,6 +31,11 @@ nsc_request(
 }
 \description{
 Create a National Student Clearinghouse request file in the required format.
-This requires a config file which contains required elements.
-DOB must be either a date or a character string with format "%Y%m%d".
+This requires a configuration object which contains required elements.
+nsc_conf <- nsc_config(
+schoolCode=YOURFICECODE,
+branchCode=YOURBRANCHCODE,
+schoolName=YOURSCHOOLNAME
+)
+DOB must be either a date or a character string with format "\%Y\%m\%d".
 }

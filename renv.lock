@@ -38,8 +38,14 @@
     "cli": {
       "Package": "cli",
       "Version": "3.3.0",
-      "Source": "Repository",
+      "Source": "CRAN",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "cli",
+      "RemoteRef": "cli",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
+      "RemoteSha": "3.3.0",
       "Hash": "23abf173c2b783dcc43379ab9bba00ee",
       "Requirements": [
         "glue"
@@ -72,8 +78,14 @@
     "dplyr": {
       "Package": "dplyr",
       "Version": "1.0.9",
-      "Source": "Repository",
+      "Source": "CRAN",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "dplyr",
+      "RemoteRef": "dplyr",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
+      "RemoteSha": "1.0.9",
       "Hash": "f0bda1627a7f5d3f9a0b5add931596ac",
       "Requirements": [
         "R6",
@@ -249,11 +261,37 @@
       "Hash": "04884d9a75d778aca22c7154b8333ec9",
       "Requirements": []
     },
+    "stringi": {
+      "Package": "stringi",
+      "Version": "1.7.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bba431031d30789535745a9627ac9271",
+      "Requirements": []
+    },
+    "stringr": {
+      "Package": "stringr",
+      "Version": "1.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0759e6b6c0957edb1311028a49a35e76",
+      "Requirements": [
+        "glue",
+        "magrittr",
+        "stringi"
+      ]
+    },
     "tibble": {
       "Package": "tibble",
       "Version": "3.1.7",
-      "Source": "Repository",
+      "Source": "CRAN",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "tibble",
+      "RemoteRef": "tibble",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
+      "RemoteSha": "3.1.7",
       "Hash": "08415af406e3dd75049afef9552e7355",
       "Requirements": [
         "ellipsis",
