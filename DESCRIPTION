@@ -1,0 +1,11 @@
+Package: nscrequest
+Type: Package
+Title: Create and process a National Student Clearinghouse request/return file
+Version: 0.0.2022-08-30.1
+Author: David Onder
+Maintainer: David Onder <donder@haywood.edu>
+Description: Create a National Student Clearinghouse request file in the required format.
+    Also, process a return file into a data frame with one record per student per college.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
