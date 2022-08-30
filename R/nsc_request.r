@@ -10,6 +10,7 @@
 #' DOB must be either a date or a character string with format "%Y%m%d".
 #'
 #' @inheritParams nsc_request_pa
+#' @param inquiryType One of CO (Longitudinal Cohort), DA (Declined Admission), PA (Prior Attendance), or SE (Subsequent Enrollment)
 #' @export
 #' @importFrom magrittr `%<>%` `%>%`
 #' @importFrom dplyr coalesce
@@ -22,8 +23,8 @@ nsc_request <- function(df,
                         path,
                         fn,
                         search,
-                        enrolledStudents
-                        ) {
+                        enrolledStudents,
+                        write=TRUE) {
 
     if (missing(df)) {
         stop("Dataframe not provided")
@@ -178,9 +179,11 @@ nsc_request <- function(df,
     t <- data.frame("T1",as.character(nrow(r)+2,0), stringsAsFactors = FALSE)
 
     # Write out the file
-    readr::write_tsv(h, path=nscFile, append=FALSE, col_names=FALSE, na="NA")
-    readr::write_tsv(r, path=nscFile, append=TRUE,  col_names=FALSE, na="NA")
-    readr::write_tsv(t, path=nscFile, append=TRUE,  col_names=FALSE, na="NA")
+    if (write) {
+        readr::write_tsv(h, file=nscFile, append=FALSE, col_names=FALSE, na="NA")
+        readr::write_tsv(r, file=nscFile, append=TRUE,  col_names=FALSE, na="NA")
+        readr::write_tsv(t, file=nscFile, append=TRUE,  col_names=FALSE, na="NA")
+    }
 
     return(r)
 }
@@ -226,12 +229,20 @@ nsc_config <- function( schoolCode, branchCode, schoolName ) {
 #'
 nsc_request_pa <- function(df,
                            config,
-                           path=getwd(),
-                           fn=paste0(deparse(substitute(df)),"_PA.tsv"),
-                           search=format(Sys.Date(),"%Y%m%d"),
-                           enrolledStudents=TRUE) {
+                           path,
+                           fn,
+                           search,
+                           enrolledStudents=TRUE,
+                           write=TRUE) {
 
-    return(nsc_request(df,config,path=path,fn=fn,search=search,inquiryType="PA",enrolledStudents=enrolledStudents))
+    return(nsc_request(df,
+                       config,
+                       path=path,
+                       fn=fn,
+                       search=search,
+                       inquiryType="PA",
+                       enrolledStudents=enrolledStudents,
+                       write=write))
 }
 
 
@@ -252,13 +263,21 @@ nsc_request_pa <- function(df,
 #' @param path Path where NSC file will be saved (default=`getwd()`)
 #' @param fn Name of the NSC file (default=same name as the dataframe with "_{inquiryType}.tsv" appended)
 #' @param search If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)
+#' @param write Whether function should write out the file
 #' @export
 #'
 nsc_request_se <- function(df,
                            config,
-                           path=getwd(),
-                           fn=paste0(deparse(substitute(df)),"_SE.tsv"),
-                           search=format(Sys.Date(),"%Y%m%d")) {
+                           path,
+                           fn,
+                           search,
+                           write=TRUE) {
 
-    return(nsc_request(df,config,path=path,fn=fn,search=search,inquiryType="SE",enrolledStudents=FALSE))
+    return(nsc_request(df,
+                       config,
+                       path=path,
+                       fn=fn,
+                       search=search,inquiryType="SE",
+                       enrolledStudents=FALSE,
+                       write=write))
 }

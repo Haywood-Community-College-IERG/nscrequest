@@ -1,3 +1,16 @@
+# nscrequest 0.1.2022-08-30.4
+
+## New features
+
+* Added `write` parameter to `nsc_request`
+* Added test cases
+
+# nscrequest 0.0.2022-08-30.3
+
+## New features
+
+* Re-added `inquiryType` param description
+
 # nscrequest 0.0.2022-08-30.2
 
 ## New features

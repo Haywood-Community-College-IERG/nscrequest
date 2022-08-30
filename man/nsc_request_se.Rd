@@ -4,24 +4,20 @@
 \alias{nsc_request_se}
 \title{Create a National Student Clearinghouse Subsequent Enrollment (SE) request file}
 \usage{
-nsc_request_se(
-  df,
-  config,
-  path = getwd(),
-  fn = paste0(deparse(substitute(df)), "_SE.tsv"),
-  search = format(Sys.Date(), "\%Y\%m\%d")
-)
+nsc_request_se(df, config, path, fn, search, write = TRUE)
 }
 \arguments{
 \item{df}{Dataframe to convert into format for submission to NSC}
 
-\item{config}{A configuration dataframe for NSC files}
+\item{config}{A configuration object for NSC files}
 
-\item{path}{Path where NSC file will be saved (default=getwd())}
+\item{path}{Path where NSC file will be saved (default=\code{getwd()})}
 
-\item{fn}{Name of the NSC file (default=same name as the dataframe with "_SE.tsv" appended)}
+\item{fn}{Name of the NSC file (default=same name as the dataframe with "_{inquiryType}.tsv" appended)}
 
 \item{search}{If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)}
+
+\item{write}{Whether function should write out the file}
 }
 \description{
 Create a National Student Clearinghouse Subsequent Enrollment (SE) request file

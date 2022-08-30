@@ -11,3 +11,4 @@
 ^cran-comments\.md$
 ^\.travis\.yml$
 ^revdep$
+cran-comments.md

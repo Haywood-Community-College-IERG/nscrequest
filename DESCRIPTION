@@ -1,7 +1,7 @@
 Package: nscrequest
 Type: Package
 Title: Create and process a National Student Clearinghouse request/return file
-Version: 0.0.2022-08-30.2
+Version: 0.1.2022-08-30.4
 Authors@R: person("David", "Onder", 
                   email = "donder@haywood.edu", 
                   role = c("aut", "cre"),
@@ -24,3 +24,6 @@ Imports:
     tibble (>= 3.1.6),
     tidyr (>= 1.1.4),
     rlang (>= 1.0.2)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

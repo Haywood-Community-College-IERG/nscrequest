@@ -7,24 +7,27 @@
 nsc_request_pa(
   df,
   config,
-  path = getwd(),
-  fn = paste0(deparse(substitute(df)), "_PA.tsv"),
-  search = format(Sys.Date(), "\%Y\%m\%d"),
-  enrolledStudents = TRUE
+  path,
+  fn,
+  search,
+  enrolledStudents = TRUE,
+  write = TRUE
 )
 }
 \arguments{
 \item{df}{Dataframe to convert into format for submission to NSC}
 
-\item{config}{A configuration dataframe for NSC files}
+\item{config}{A configuration object for NSC files}
 
-\item{path}{Path where NSC file will be saved (default=getwd())}
+\item{path}{Path where NSC file will be saved (default=\code{getwd()})}
 
-\item{fn}{Name of the NSC file (default=same name as the dataframe with "_SE.tsv" appended)}
+\item{fn}{Name of the NSC file (default=same name as the dataframe with "_{inquiryType}.tsv" appended)}
 
 \item{search}{If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)}
 
-\item{enrolledStudents}{Are these students currently enrolled? Set to FALSE for PA query to allow SSN.}
+\item{enrolledStudents}{Are these students currently enrolled? Set to FALSE for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)}
+
+\item{write}{Whether function should write out the file}
 }
 \description{
 Create a National Student Clearinghouse Prior Attendance (PA) request file

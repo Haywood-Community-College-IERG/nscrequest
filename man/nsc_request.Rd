@@ -7,11 +7,12 @@
 nsc_request(
   df,
   config,
-  inquiryType = "SE",
-  path = NA_character_,
-  fn = paste0(deparse(substitute(df)), "_SE.tsv"),
-  search = format(Sys.Date(), "\%Y\%m\%d"),
-  enrolledStudents = ifelse(inquiryType == "SE", FALSE, TRUE)
+  inquiryType,
+  path,
+  fn,
+  search,
+  enrolledStudents,
+  write = TRUE
 )
 }
 \arguments{
@@ -21,13 +22,15 @@ nsc_request(
 
 \item{inquiryType}{One of CO (Longitudinal Cohort), DA (Declined Admission), PA (Prior Attendance), or SE (Subsequent Enrollment)}
 
-\item{path}{Path where NSC file will be saved (default=getwd())}
+\item{path}{Path where NSC file will be saved (default=\code{getwd()})}
 
-\item{fn}{Name of the NSC file (default=same name as the dataframe with "_SE.tsv" appended)}
+\item{fn}{Name of the NSC file (default=same name as the dataframe with "_{inquiryType}.tsv" appended)}
 
 \item{search}{If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)}
 
-\item{enrolledStudents}{Are these students currently enrolled? Set to FALSE for PA query to allow SSN.}
+\item{enrolledStudents}{Are these students currently enrolled? Set to FALSE for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)}
+
+\item{write}{Whether function should write out the file}
 }
 \description{
 Create a National Student Clearinghouse request file in the required format.
