@@ -9,13 +9,7 @@
 #'             )
 #' DOB must be either a date or a character string with format "%Y%m%d".
 #'
-#' @param df Dataframe to convert into format for submission to NSC
-#' @param config A configuration object for NSC files
-#' @param inquiryType One of CO (Longitudinal Cohort), DA (Declined Admission), PA (Prior Attendance), or SE (Subsequent Enrollment)
-#' @param path Path where NSC file will be saved (default=getwd())
-#' @param fn Name of the NSC file (default=same name as the dataframe with "_SE.tsv" appended)
-#' @param search If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)
-#' @param enrolledStudents Are these students currently enrolled? Set to FALSE for PA query to allow SSN.
+#' @inheritParams nsc_request_pa
 #' @export
 #' @importFrom magrittr `%<>%` `%>%`
 #' @importFrom dplyr coalesce
@@ -24,15 +18,27 @@
 #'
 nsc_request <- function(df,
                         config,
-                        inquiryType="SE",
-                        path=NA_character_,
-                        fn=paste0(deparse(substitute(df)),"_SE.tsv"),
-                        search=format(Sys.Date(),"%Y%m%d"),
-                        enrolledStudents=ifelse(inquiryType=="SE",FALSE,TRUE)
+                        inquiryType,
+                        path,
+                        fn,
+                        search,
+                        enrolledStudents
                         ) {
 
     if (missing(df)) {
         stop("Dataframe not provided")
+    }
+
+    if (missing(config)) {
+        stop("Configuration not provided")
+    }
+
+    if (missing(inquiryType)) {
+        inquiryType <- "SE"
+    }
+
+    if (missing(enrolledStudents)) {
+        enrolledStudents <- ifelse(inquiryType=="SE",FALSE,TRUE)
     }
 
     df2 <- df
@@ -66,6 +72,10 @@ nsc_request <- function(df,
         warning(paste("Path set to",path))
     }
 
+    if (missing(search)) {
+        search <- format(Sys.Date(),"%Y%m%d")
+    }
+
     # If search is just YYYY, set to YYYY0101, if just YYYYMM, set to YYYYMM01.
     if (nchar(search) == 4) {
         search %<>% paste0("0101")
@@ -80,7 +90,7 @@ nsc_request <- function(df,
         warning(paste("search changed to", search))
     }
 
-    if (missing(fn)) {
+    if (missing(fn) || is.na(fn)) {
         # Get the name of 'df' and use as filename
         fn <- paste0(deparse(substitute(df)),"_",inquiryType,".tsv")
         warning(paste("fn set to",fn))
@@ -209,12 +219,9 @@ nsc_config <- function( schoolCode, branchCode, schoolName ) {
 #'             )
 #' DOB must be either a date or a character string with format "%Y%m%d".
 #'
-#' @param df Dataframe to convert into format for submission to NSC
-#' @param config A configuration dataframe for NSC files
-#' @param path Path where NSC file will be saved (default=getwd())
-#' @param fn Name of the NSC file (default=same name as the dataframe with "_SE.tsv" appended)
-#' @param search If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)
-#' @param enrolledStudents Are these students currently enrolled? Set to FALSE for PA query to allow SSN.
+#' @inheritParams nsc_request_se
+#' @param enrolledStudents Are these students currently enrolled? Set to FALSE for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)
+#'
 #' @export
 #'
 nsc_request_pa <- function(df,
@@ -241,9 +248,9 @@ nsc_request_pa <- function(df,
 #' DOB must be either a date or a character string with format "%Y%m%d".
 #'
 #' @param df Dataframe to convert into format for submission to NSC
-#' @param config A configuration dataframe for NSC files
-#' @param path Path where NSC file will be saved (default=getwd())
-#' @param fn Name of the NSC file (default=same name as the dataframe with "_SE.tsv" appended)
+#' @param config A configuration object for NSC files
+#' @param path Path where NSC file will be saved (default=`getwd()`)
+#' @param fn Name of the NSC file (default=same name as the dataframe with "_{inquiryType}.tsv" appended)
 #' @param search If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)
 #' @export
 #'
