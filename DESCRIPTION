@@ -1,6 +1,6 @@
 Package: nscrequest
 Type: Package
-Title: Create and process a National Student Clearinghouse request/return file
+Title: Create and Process a National Student Clearinghouse Request/Return File
 Version: 0.1.2022-08-30.4
 Authors@R: person("David", "Onder", 
                   email = "donder@haywood.edu", 
@@ -13,7 +13,7 @@ Encoding: UTF-8
 URL: https://github.com/hcc-donder/nscrequest
 BugReports: https://github.com/hcc-donder/nscrequest/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Depends:
     R (>= 3.3.1)
 Imports:
