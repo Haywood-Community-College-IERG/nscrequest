@@ -4,3 +4,4 @@
 .Ruserdata
 /*.tsv
 !tests/testthat/fixtures/*.tsv
+..Rcheck
