@@ -19,14 +19,28 @@ nsc_request_se(df, config, path, fn, search, write = TRUE)
 
 \item{write}{Whether function should write out the file}
 }
+\value{
+This function is called mainly for its side-effects (writing out the
+request file) but also returns the student records used to create the
+Subsequent Enrollment request file.
+}
 \description{
 Create a National Student Clearinghouse Subsequent Enrollment (SE) request file
 in the required format.
+}
+\details{
 This requires a configuration object which contains required elements.
-nsc_conf <- nsc_config(
-schoolCode="YOURFICECODE",
-branchCode="YOURBRANCHCODE",
-schoolName="YOURSCHOOLNAME"
-)
-DOB must be either a date or a character string with format "\%Y\%m\%d".
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{nsc_conf <- nsc_config(
+                schoolCode="YOURFICECODE",
+                branchCode="YOURBRANCHCODE",
+                schoolName="YOURSCHOOLNAME"
+            )
+}\if{html}{\out{</div>}}
+
+DOB must be either a date or a character string with format \verb{\%Y\%m\%d}.
+}
+\seealso{
+\url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+details on how the request file is supposed to be structured.
 }

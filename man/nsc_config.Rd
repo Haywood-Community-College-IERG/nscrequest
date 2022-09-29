@@ -13,11 +13,24 @@ nsc_config(schoolCode, branchCode, schoolName)
 
 \item{schoolName}{NSC school name}
 }
+\value{
+A dataframe configuration for passing to nsc_request* calls.
+}
 \description{
+Create a National Student Clearinghouse configuration object for
+passing to nsc_request* calls.
+}
+\details{
 Create a National Student Clearinghouse configuration object. All fields are strings.
-nsc_conf <- nsc_config(
-schoolCode="YOURFICECODE",
-branchCode="YOURBRANCHCODE",
-schoolName="YOURSCHOOLNAME"
-)
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{nsc_conf <- nsc_config(
+                schoolCode="YOURFICECODE",
+                branchCode="YOURBRANCHCODE",
+                schoolName="YOURSCHOOLNAME"
+            )
+}\if{html}{\out{</div>}}
+}
+\seealso{
+\url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+details on how the request file is supposed to be structured.
 }

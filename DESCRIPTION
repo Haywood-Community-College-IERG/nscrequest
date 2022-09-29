@@ -1,13 +1,15 @@
 Package: nscrequest
 Type: Package
 Title: Create and Process a National Student Clearinghouse Request/Return File
-Version: 0.1.2022-08-30.4
+Version: 1.1.0
 Authors@R: person("David", "Onder", 
                   email = "donder@haywood.edu", 
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0001-5027-2264"))
 Description: Create a National Student Clearinghouse request file in the required format.
-    Also, process a return file into a data frame with one record per student per college.
+    Also, process a return file into a data frame with one record per student per college. 
+    See <https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf>
+    for upload and return file formats.
 License: GPL-3
 Encoding: UTF-8
 URL: https://github.com/hcc-donder/nscrequest

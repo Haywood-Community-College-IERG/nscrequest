@@ -1,17 +1,26 @@
 #' Create a National Student Clearinghouse request file
 #'
 #' Create a National Student Clearinghouse request file in the required format.
+#'
 #' This requires a configuration object which contains required elements.
+#' ```
 #' nsc_conf <- nsc_config(
 #'                 schoolCode=YOURFICECODE,
 #'                 branchCode=YOURBRANCHCODE,
 #'                 schoolName=YOURSCHOOLNAME
 #'             )
-#' DOB must be either a date or a character string with format "%Y%m%d".
+#' ```
+#' DOB must be either a date or a character string with format `%Y%m%d`.
 #'
 #' @inheritParams nsc_request_pa
-#' @param inquiryType One of CO (Longitudinal Cohort), DA (Declined Admission), PA (Prior Attendance), or SE (Subsequent Enrollment)
+#' @param inquiryType One of CO (Longitudinal Cohort), DA (Declined Admission),
+#'     PA (Prior Attendance), or SE (Subsequent Enrollment)
+#' @return This function is called mainly for its side-effects (writing out the
+#'     request file) but also returns the student records used to create the
+#'     request file.
 #' @export
+#' @seealso \url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+#'     details on how the request file is supposed to be structured.
 #' @importFrom magrittr `%<>%` `%>%`
 #' @importFrom dplyr coalesce
 #' @importFrom readr write_tsv
@@ -131,7 +140,7 @@ nsc_request <- function(df,
         r$Suffix <- trimws("     ")
     }
 
-    if (class(df2$DOB)=="Date") {
+    if (inherits(df2$DOB,"Date")) {
         r$DOB <- format(df2$DOB,"%Y%m%d")
     } else {
         r$DOB <- df2$DOB
@@ -147,7 +156,7 @@ nsc_request <- function(df,
         r$SearchBeginDate <- search
         warning(paste("SearchBeginDate not provided - defaulting to",search))
     } else {
-        if (class(df2$SearchBeginDate)=="Date") {
+        if (inherits(df2$SearchBeginDate,"Date")) {
             r$SearchBeginDate <- format(df2$SearchBeginDate,"%Y%m%d")
         } else {
             r$SearchBeginDate <- df2$SearchBeginDate
@@ -190,16 +199,24 @@ nsc_request <- function(df,
 
 #' Create a National Student Clearinghouse configuration object
 #'
+#' Create a National Student Clearinghouse configuration object for
+#' passing to nsc_request* calls.
+#'
 #' Create a National Student Clearinghouse configuration object. All fields are strings.
+#' ```
 #' nsc_conf <- nsc_config(
 #'                 schoolCode="YOURFICECODE",
 #'                 branchCode="YOURBRANCHCODE",
 #'                 schoolName="YOURSCHOOLNAME"
 #'             )
+#' ```
 #'
 #' @param schoolCode NSC school code
 #' @param branchCode NSC branch code
 #' @param schoolName NSC school name
+#' @return A dataframe configuration for passing to nsc_request* calls.
+#' @seealso \url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+#'     details on how the request file is supposed to be structured.
 #' @export
 nsc_config <- function( schoolCode, branchCode, schoolName ) {
     return( data.frame(
@@ -214,17 +231,25 @@ nsc_config <- function( schoolCode, branchCode, schoolName ) {
 #'
 #' Create a National Student Clearinghouse Prior Attendance (PA) request file
 #' in the required format.
+#'
 #' This requires a configuration object which contains required elements.
+#' ```
 #' nsc_conf <- nsc_config(
 #'                 schoolCode="YOURFICECODE",
 #'                 branchCode="YOURBRANCHCODE",
 #'                 schoolName="YOURSCHOOLNAME"
 #'             )
-#' DOB must be either a date or a character string with format "%Y%m%d".
+#' ```
+#' DOB must be either a date or a character string with format `%Y%m%d`.
 #'
 #' @inheritParams nsc_request_se
-#' @param enrolledStudents Are these students currently enrolled? Set to FALSE for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)
-#'
+#' @param enrolledStudents Are these students currently enrolled? Set to FALSE
+#'     for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)
+#' @return This function is called mainly for its side-effects (writing out the
+#'     request file) but also returns the student records used to create the
+#'     Prior Attendance request file.
+#' @seealso \url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+#'     details on how the request file is supposed to be structured.
 #' @export
 #'
 nsc_request_pa <- function(df,
@@ -250,13 +275,16 @@ nsc_request_pa <- function(df,
 #'
 #' Create a National Student Clearinghouse Subsequent Enrollment (SE) request file
 #' in the required format.
+#'
 #' This requires a configuration object which contains required elements.
+#' ```
 #' nsc_conf <- nsc_config(
 #'                 schoolCode="YOURFICECODE",
 #'                 branchCode="YOURBRANCHCODE",
 #'                 schoolName="YOURSCHOOLNAME"
 #'             )
-#' DOB must be either a date or a character string with format "%Y%m%d".
+#' ```
+#' DOB must be either a date or a character string with format `%Y%m%d`.
 #'
 #' @param df Dataframe to convert into format for submission to NSC
 #' @param config A configuration object for NSC files
@@ -264,6 +292,11 @@ nsc_request_pa <- function(df,
 #' @param fn Name of the NSC file (default=same name as the dataframe with "_{inquiryType}.tsv" appended)
 #' @param search If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)
 #' @param write Whether function should write out the file
+#' @return This function is called mainly for its side-effects (writing out the
+#'     request file) but also returns the student records used to create the
+#'     Subsequent Enrollment request file.
+#' @seealso \url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+#'     details on how the request file is supposed to be structured.
 #' @export
 #'
 nsc_request_se <- function(df,

@@ -20,7 +20,8 @@ nsc_request(
 
 \item{config}{A configuration object for NSC files}
 
-\item{inquiryType}{One of CO (Longitudinal Cohort), DA (Declined Admission), PA (Prior Attendance), or SE (Subsequent Enrollment)}
+\item{inquiryType}{One of CO (Longitudinal Cohort), DA (Declined Admission),
+PA (Prior Attendance), or SE (Subsequent Enrollment)}
 
 \item{path}{Path where NSC file will be saved (default=\code{getwd()})}
 
@@ -28,17 +29,32 @@ nsc_request(
 
 \item{search}{If the dataframe does not include a 'Search Begin Date' field, this will be used (default=TODAY)}
 
-\item{enrolledStudents}{Are these students currently enrolled? Set to FALSE for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)}
+\item{enrolledStudents}{Are these students currently enrolled? Set to FALSE
+for PA query to allow SSN. (default=FALSE for SE, otherwise TRUE)}
 
 \item{write}{Whether function should write out the file}
 }
+\value{
+This function is called mainly for its side-effects (writing out the
+request file) but also returns the student records used to create the
+request file.
+}
 \description{
 Create a National Student Clearinghouse request file in the required format.
+}
+\details{
 This requires a configuration object which contains required elements.
-nsc_conf <- nsc_config(
-schoolCode=YOURFICECODE,
-branchCode=YOURBRANCHCODE,
-schoolName=YOURSCHOOLNAME
-)
-DOB must be either a date or a character string with format "\%Y\%m\%d".
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{nsc_conf <- nsc_config(
+                schoolCode=YOURFICECODE,
+                branchCode=YOURBRANCHCODE,
+                schoolName=YOURSCHOOLNAME
+            )
+}\if{html}{\out{</div>}}
+
+DOB must be either a date or a character string with format \verb{\%Y\%m\%d}.
+}
+\seealso{
+\url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+details on how the request file is supposed to be structured.
 }

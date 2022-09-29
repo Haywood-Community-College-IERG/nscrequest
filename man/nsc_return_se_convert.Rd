@@ -9,11 +9,25 @@ nsc_return_se_convert(fn)
 \arguments{
 \item{fn}{Full path to the details file provided by NSC}
 }
+\value{
+A dataframe of all returned records where the following changes have been made:
+- Graduation Title, Major, and CIP values have been changed to \code{UNKNOWN} if missing.
+- For each student, for each college:
+- set Enrollment Begin to earliest date
+- set Enrollment End to latest date
+- create Total Enrollment Days as sum of Enrollment Days
+- create Last Enrollment Major 1/CIP 1/Major 2/CIP 2 to the last respective value
+- keep only 1 record for this student/college combination
+}
 \description{
 Convert the National Student Clearinghouse return file to a database format
 that is easier to work with. Each student will have one record per college
 attended. Additional records are added for each degree earned. If a student
 did not attend a college that reports to the NSC, then Record Found Y/N will
 be 'N'.
+}
+\seealso{
+\url{https://studentclearinghouse.info/onestop/wp-content/uploads/STCU_User_Manual.pdf} for
+details on how the return file is structured.
 }
 \keyword{file}

@@ -1,3 +1,23 @@
+# nscrequest 1.1.0
+
+## New features
+
+None
+
+## Changes
+
+Move to version 1.1.0 for CRAN.
+
+# nscrequest 0.1.2022-09-07.1
+
+## New features
+
+None
+
+## Changes
+
+Change DOB and SearchBeginDate checks to inherits.
+
 # nscrequest 0.1.2022-08-30.4
 
 ## New features
